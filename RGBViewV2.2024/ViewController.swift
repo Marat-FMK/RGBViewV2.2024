@@ -45,9 +45,13 @@ class ViewController: UIViewController {
     
     @IBAction func changeTheValueSliders() {
         
-        redValueLabel.text = String(redSliderValue.value)
-        greenValueLabel.text = String(greenSliderValue.value)
-        blueViewLabel.text = String(blueSliderValue.value)
+        if redSliderValue.value == 1 && greenSliderValue.value == 1 && blueSliderValue.value == 1 {
+            showAlert(with: "White Color", and: "Plese, dont touch slireds")
+        }
+        
+        redValueLabel.text = String(round(redSliderValue.value * 100) / 100)
+        greenValueLabel.text = String(round(greenSliderValue.value * 100) / 100)
+        blueViewLabel.text = String(round(blueSliderValue.value * 100) / 100)
         
         rgbView.backgroundColor = UIColor(_colorLiteralRed: redSliderValue.value, green: greenSliderValue.value, blue: blueSliderValue.value, alpha: 1)
     }
@@ -55,3 +59,14 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController {
+    
+    private func showAlert(with title: String, and massage: String) {
+        let alert = UIAlertController(title: title, message: massage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok", style: .default){_ in self.greenSliderValue.value = 0
+    }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+}
+    }
+    
